@@ -85,7 +85,8 @@ public class menuAdmin {
                                1- Pagar cuota
                                2- Abonar dinero
                                3- Historial de pagos
-                               4- Salir
+                               4. HISTORIAL MES PAGOS
+                               5- Salir
                                """);
     }
         

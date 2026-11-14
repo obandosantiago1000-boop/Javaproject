@@ -31,6 +31,8 @@ public class controllerGestionPago {
     private final ingresoPagos ingreso = new ingresoPagos();
 
     private final menuAdmin menu = new menuAdmin();
+    
+    private final controllerReportes r = new controllerReportes();
 
 
     private boolean prestamoActivo(prestamos p) {
@@ -51,6 +53,8 @@ public class controllerGestionPago {
 
         return true;
     }
+    
+    
 
 
 
@@ -174,9 +178,10 @@ public class controllerGestionPago {
         long id = ingreso.pedirId();
 
         prestamos p = daoPrestamo.buscarId(id);
+        
 
         if (!prestamoActivo(p)) {
-            return;
+            throw new SQLException("PRESTAMONOENCONTRADOEXCEPTION");
         }
 
         System.out.println(
@@ -221,6 +226,8 @@ public class controllerGestionPago {
     private void historial() throws SQLException {
 
         System.out.println("\n===== HISTORIAL DE PAGOS =====");
+        
+        try {
 
         long id = ingreso.pedirId();
 
@@ -258,6 +265,10 @@ public class controllerGestionPago {
         System.out.println(
             "Saldo pendiente: " + String.format("%.2f", p.getSaldoPendiente())
         );
+        }catch (SQLException e){
+            System.out.println("no se pudo listar el historial");
+        }
+        
     }
 
 
@@ -300,8 +311,10 @@ public class controllerGestionPago {
                 case 2 -> abonar();
 
                 case 3 -> historial();
+                
+                case 4 -> r.menu();
 
-                case 4 -> System.out.println(
+                case 5 -> System.out.println(
                     "Regresando al menú principal..."
                 );
 
@@ -309,6 +322,6 @@ public class controllerGestionPago {
                     System.out.println("Opción fuera de rango.");
             }
 
-        } while (op != 4);
+        } while (op != 5);
     }
 }

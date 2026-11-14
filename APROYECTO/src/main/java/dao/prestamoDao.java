@@ -265,8 +265,8 @@ public List<prestamos> buscarPorCliente(long idCliente) throws SQLException {
                 }
             }
         }
-
         return null;
+        
     }
 
 
